@@ -1,4 +1,10 @@
-<?php if ($current_event): ?>
+<?php
+if ($current_event):
+    $event_organiser = $current_event->get_organiser();
+    $m_pos_db = Guest::is_guest($current_user->id, $current_event->id);
+    $m_pos = array_shift($m_pos_db);
+    $position = strtolower($m_pos->position);
+    ?>
     <div class="panel with-nav-tabs panel-default">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
@@ -13,9 +19,12 @@
                 <li>
                     <a href="#event_guests" data-toggle="tab">Guests</a>
                 </li>
-                <li>
-                    <a href="#event_items" data-toggle="tab">Items</a>
-                </li>
+
+                <?php if ($position == 'admin' || $position == 'member' || $current_event->organiser == $current_user->id): ?>
+                    <li>
+                        <a href="#event_items" data-toggle="tab">Items</a>
+                    </li>
+                <?php endif; ?>
                 <li>
                     <a href="#event_lists" data-toggle="tab">Lists</a>
                 </li>
@@ -38,7 +47,7 @@
                     <header class="row">
                         <div class="col-md-10">
                             <div class="col-md-12">
-                                <div class="col-md-4"><?php echo $current_event->avatar("128px", "img img-thumbnail"); ?></div>
+                                <div class="col-md-4"><?php echo $current_event->avatar("128px", "img img-thumbnail zoom-img"); ?></div>
                                 <div class="col-md-8">
                                     <p class="text-justify"><?php echo $current_event->description; ?></p>
                                     <span class="text-info"><?php echo $current_event->datetime(); ?></span>

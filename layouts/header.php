@@ -18,7 +18,7 @@ if ($current_user->id > 0) {
         <link rel="stylesheet" href="dependencies/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="dependencies/dist/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="custom/dist/css/select2.css">
-        <link rel="stylesheet" href="custom/dist/css/custom.css">
+        <link rel="stylesheet" href="custom/dist/css/lakshay.css">
 
 
         <!-- JavaScript libraries -->

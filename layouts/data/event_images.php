@@ -12,7 +12,9 @@
                                         <h3 class="panel-title">You can even have a Panel Title</h3>
                                     </div>-->
                     <div class="panel-image">
-                        <img src="<?php echo $image->image_dir() . DS . $image->img; ?>" class="panel-image-preview" />
+                        <a href="./view_image.php?image_id=<?php echo $image->id; ?>">
+                            <img src="<?php echo $image->image_dir() . DS . $image->img; ?>" class="panel-image-preview" />
+                        </a>
                     </div>
                     <div class = "panel-body">
                         <p>
@@ -28,7 +30,7 @@
         endwhile;
         if ($imgCount < 1) :
             ?>
-        <h2 class="panel-heading ">Sorry no images for this event yet.</h2>
+            <h2 class="panel-heading ">Sorry no images for this event yet.</h2>
             <?php
         endif;
         ?>

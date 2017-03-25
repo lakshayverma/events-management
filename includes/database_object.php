@@ -19,7 +19,14 @@ class DatabaseObject {
         return self::find_by_sql("SELECT * FROM " . static::$table_name);
     }
 
+    public static function find_limited($limit = 10) {
+        return self::find_by_sql("SELECT * FROM " . static::$table_name . " limit $limit");
+    }
+
     public static function find_by_id($id) {
+        if (empty($id)) {
+            return false;
+        }
         global $database;
         $id = $database->escape_value($id);
         $result_array = self::find_by_sql("SELECT * FROM " . static::$table_name . " WHERE id = {$id} LIMIT 1");
@@ -154,6 +161,10 @@ class DatabaseObject {
         }
     }
 
+    public function init_members() {
+        // DO NOTHING;
+    }
+
     public function table_edit($editable = FALSE) {
         global $current_user;
 
@@ -161,11 +172,21 @@ class DatabaseObject {
             $this->init_members();
         }
 
-        if ($current_user->type == 'admin' && $editable) {
+        if ($current_user->is_admin() && $editable) {
             return "<td class=\"col-sm-12 col-md-2\">"
+                    . "<form method=\"post\" action=\"./tableForms/delete.php\" class=\"col-md-6\">"
+                    . "<button type=\"submit\" class=\"btn btn-small btn-danger\">"
+                    . "<span class=\"glyphicon glyphicon-trash\"></span>"
+                    . "</button>"
+                    . "<input type=\"hidden\" name=\"table_name\" value=\"" . static::$table_name . "\"/>"
+                    . "<input type=\"hidden\" name=\"id\"value=\"" . $this->id . "\"/>"
+                    . "<input type=\"hidden\" name=\"redirect_url\"value=\"" . $_SERVER["REQUEST_URI"] . "\"/>"
+                    . "</form>"
+                    . "<div class=\"col-md-6\">"
                     . "<a class=\"btn btn-warning\" href=\"?table=" . static::$table_name . "&id=$this->id\">"
                     . "<span class=\"glyphicon glyphicon-edit\"></span>" . $this->id
                     . "</a>"
+                    . "</div>"
                     . "</td>";
         } else {
             return "<td class=\"col-sm-12 col-md-2\">" . $this->id . "</td>";
@@ -200,38 +221,55 @@ class DatabaseObject {
             return static::format_datetime($format, $this->datetime);
         }
     }
-    
-    public static function format_datetime($format = "h:i a, F d Y", $datetime){
-            $dt = new DateTime($datetime);
-            return $dt->format($format);
+
+    public static function format_datetime($format = "h:i a, F d Y", $datetime) {
+        $dt = new DateTime($datetime);
+        return $dt->format($format);
+    }
+
+    public static function form_date($date) {
+        return static::format_datetime("Y-m-d", $date) . 'T' . static::format_datetime("h:i:s", $date);
+    }
+
+    public function img() {
+        return $this->image_dir() . DS . $this->img;
     }
     
-    
-    public function name(){
-        return ".";
+    public function image_source(){
+        return $this->image_dir() . DS . $this->img;
     }
-    
-    public function title(){
-        return $this->name();
+
+    public function image() {
+        return $this->avatar();
     }
-    
-    public function avatar($image_size = "72px", $class = "img img-thumbnail", $title = "org") {
-        $title = ($title == "-") ? "" : $this->name();
+
+    public function avatar($image_size = "72px", $class = "img img-thumbnail", $tag_title = "-") {
+        $title = ($tag_title == "-") ? "" : $this->name();
         $class = $class . " img-square img-" . str_replace("px", "", $image_size);
-        return "<img"
-                . " width=\"$image_size\""
-                . " height=\"$image_size\""
-                . " alt=\" " . $this->name() . "\""
-                . " title=\" " . $title . "\""
-                . " class=\"$class\""
-                . " src=\"" . $this->image_dir() . DS . $this->img . "\""
-                . "/>";
+        if ($this->has_attribute('img')) {
+            $startTag = "<img";
+            $endTag = "/>";
+            $content = " width=\"$image_size\""
+                    . " height=\"$image_size\""
+                    . " alt=\" " . $this->name() . "\""
+                    . " title=\" " . $title . "\""
+                    . " class=\"$class\""
+                    . " src=\"" . $this->img() . "\"";
+        } else {
+            $startTag = "<span>";
+            $endTag = "</span>";
+            $content = $this->name();
+        }
+
+        return $startTag
+                . $content
+                . $endTag;
     }
 
     public function intro($image_size = "72px", $class = "", $classImg = "img img-thumbnail", $title = "org") {
         global $session;
         $user = $session->get_user_object();
-        if ($user->type == 'admin') {
+        if ($user->is_admin()) {
             return "<a href=\"./list_tables.php?table=" . static::$table_name . "&id=$this->id\" class=\"$class\" >"
                     .
                     $this->avatar($image_size, $classImg, $title)
@@ -239,6 +277,10 @@ class DatabaseObject {
         } else {
             return $this->avatar($image_size, $classImg, $title);
         }
+    }
+
+    public function title() {
+        return $this->name();
     }
 
 }

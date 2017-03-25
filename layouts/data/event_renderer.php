@@ -63,7 +63,7 @@
 
         <div>
             <h6>Past Events</h6>
-            <select onchange="openEvent(this.value)">
+            <select id="past_events" onchange="openEvent(this.value)">
                 <option>Events that are in Past.</option>
                 <?php
                 while ($invite = current($invited_events)) {
@@ -86,6 +86,11 @@
                 }
                 ?>
             </select>
+
+            <script>
+                $("#past_events").select2();
+            </script>
+
         </div>
     </div>
     <!-- /.col-md-4 -->
@@ -109,11 +114,11 @@
                 . " datetime >= CURRENT_DATE()"
                 . ")"
                 . ")"
-                . " order by status";
+                . " order by deadline, status";
         $tasks = Task::find_by_sql($sql);
         ?>
         <?php
-        while ($task = current($tasks)) {
+        while ($task = current($tasks)) :
             $task->init_members();
             ?>
             <div class="panel panel-<?php echo $task->get_class(); ?>">
@@ -176,7 +181,7 @@
             </div>
             <?php
             next($tasks);
-        }
+        endwhile; // Tasks
         ?>
     </div>
 

@@ -28,6 +28,11 @@ class User extends DatabaseObject {
         return $user;
     }
 
+    public function is_admin() {
+        $type = strtolower($this->type);
+        return ($type == "admin");
+    }
+
     public function name() {
         return "$this->first_name $this->last_name";
     }

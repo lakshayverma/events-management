@@ -48,11 +48,11 @@ if (isset($_GET['id'])) {
             </div>
             <div class="form-group col-md-6">
                 <label class="col-form-label" for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password" required/>
+                <input id="password" name="password" class="form-control" type="password" value="<?php echo $object->password; ?>" />
             </div>
             <div class="form-group col-md-6">
                 <label class="col-form-label" for="password2">Repeat Password</label>
-                <input id="password2" name="password2" class="form-control" type="password" required/>
+                <input id="password2" name="password2" class="form-control" type="password" value="<?php echo $object->password; ?>"/>
             </div>
             <div class="form-group col-md-12">
                 <label class="col-form-label" for="address">Address</label>

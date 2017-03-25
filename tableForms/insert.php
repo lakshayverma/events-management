@@ -25,7 +25,7 @@ if ($object->validate_attributes($object->insertion_attributes())) {
         $object->img = $object->upload_img($_FILES['img']);
     }
     $object->save();
-    if ($table == 'user') {
+    if ($table == 'user' && !$session->get_user_object() instanceof User) {
         $session->login($object);
 //        redirect_to("../" . $session->request_uri());
 //        exit();

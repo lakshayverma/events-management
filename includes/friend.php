@@ -45,13 +45,13 @@ class Friend extends DatabaseObject {
         return $friends;
     }
 
-    public function intro($image_size = "72px", $class = "") {
+    public function intro($image_size = "72px", $class = "", $classImg = "img img-thumbnail", $title = "org") {
         $this->init_members();
 
         return "<div>"
-                . $this->friend1->intro($image_size, $class)
+                . $this->friend1->intro($image_size, $class, $classImg, $title)
                 . " - "
-                . $this->friend2->intro($image_size, $class)
+                . $this->friend2->intro($image_size, $class, $classImg, $title)
                 . "</div>";
     }
 

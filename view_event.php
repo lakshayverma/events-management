@@ -10,9 +10,12 @@ $upcoming_events = Invitation::find_upcoming($current_user->id);
 $current_event = (isset($_GET['event'])) ? $_GET['event'] : 0;
 $current_event = Event::find_by_id($current_event);
 if (!$current_event) {
-    $current_event = current($events);
+    if ($events) {
+        $current_event = current($events);
+    } else {
+        $current_event = null;
+    }
 }
-$event_organiser = $current_event->get_organiser();
 include './layouts/data/event_renderer.php';
 ?>
 <?php include './layouts/footer.php' ?>

@@ -1,4 +1,4 @@
-<div class="tab-pane active" id="event_guests">
+<div class="tab-pane fade active" id="event_guests">
     <ul class="list-group">
         <?php
         $table_records = Guest::find_all_for_event($current_event->id);
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-form-label" for="position">Position</label>
-                    <select name="position" class="form-control">
+                    <select id="guest_select" name="position" class="form-control">
                         <?php
                         $options_guest = array('Guest of Honor', 'V.I.P', 'Guest', 'Member', 'Admin');
                         foreach ($options_guest as $option):

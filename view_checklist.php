@@ -7,9 +7,9 @@ include './layouts/header.php';
 $current_list = (isset($_GET['list'])) ? $_GET['list'] : 0;
 $current_list = CheckList::find_by_id($current_list);
 $current_event = $current_list->get_event();
-$guest = Guest::is_guest($current_user->id, $current_event->id);
-$guest = array_shift($guest);
-$position = strtolower($guest->position);
+$m_pos = Guest::is_guest($current_user->id, $current_event->id);
+$m_pos = array_shift($m_pos);
+$position = strtolower($m_pos->position);
 
 if ($position == 'admin' || $position == 'member' || $current_event->organiser == $current_user->id) {
     include './layouts/data/checklist_renderer.php';

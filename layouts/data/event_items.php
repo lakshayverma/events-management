@@ -1,8 +1,4 @@
 <?php
-$guest = Guest::is_guest($current_user->id, $current_event->id);
-$guest = array_shift($guest);
-$position = strtolower($guest->position);
-
 if ($position == 'admin' || $position == 'member' || $current_event->organiser == $current_user->id):
     ?>
 

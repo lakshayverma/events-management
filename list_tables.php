@@ -79,6 +79,7 @@ inside_persons_only();
 
 <?php if ($form): ?>
     <script>
+        $("#form .btn-group-vertical:last").append("<a class=\"btn btn-default\" href=\"./list_tables.php?table=<?php echo $table; ?>\">Insert a new Record</a>");
         $("#form").validate(formRules);
     <?php
     if ($object->id != '') {

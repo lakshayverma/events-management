@@ -12,7 +12,7 @@
                                         <h3 class="panel-title">You can even have a Panel Title</h3>
                                     </div>-->
                     <div class="panel-image">
-                        <a href="./view_image.php?image_id=<?php echo $image->id; ?>">
+                        <a href="./view_image.php?image_id=<?php echo $image->id; ?>" target="_blank">
                             <img src="<?php echo $image->image_dir() . DS . $image->img; ?>" class="panel-image-preview" />
                         </a>
                     </div>

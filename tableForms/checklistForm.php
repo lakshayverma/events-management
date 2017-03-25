@@ -19,10 +19,11 @@ if (isset($_GET['id'])) {
             <label class="col-form-label" for="title">Title</label>
             <input id="title" name="title" class="form-control" type="text" value="<?php echo $object->title; ?>" required/>
         </div>
-        <div class="form-group col-md-6">
-            <label class="col-form-label" for="img">Image</label>
-            <input id="img" name="img" class="form-control" type="file" accept="image/*" required/>
-        </div>
+            <div class="form-group col-md-12">
+                <label class="col-form-label" for="img">Image</label>
+                <input id="img" name="img" class="form-control" type="file" accept="image/*" <?php if (!$object->id) echo 'required'; ?>/>
+            </div>
+
 
         <div class="form-group col-md-6">
             <label class="col-form-label" for="user">Created BY</label>

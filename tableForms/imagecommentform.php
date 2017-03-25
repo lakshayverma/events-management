@@ -10,10 +10,9 @@ if (isset($_GET['id'])) {
 <div class="container-fluid">
 
     <div class="panel panel-default col-md-8 col-md-offset-2">
-        <h3 class="panel-heading text-capitalize">Insert new <?php echo $table; ?> Image</h3>
+        <h3 class="panel-heading text-capitalize">Insert new <?php echo $table; ?></h3>
 
         <form id="form" class="panel-body" method="post" action="tableForms/insert.php" enctype="multipart/form-data">
-
             <?php if ($object->id): ?>
                 <div class="form-group col-md-2">
                     <label class="col-form-label" for="id">Id</label>
@@ -21,24 +20,33 @@ if (isset($_GET['id'])) {
                 </div>
             <?php endif; ?>
 
-            <div class="form-group col-md-4">
-                <label class="col-form-label" for="event">Select an Event</label>
-                <select id="event" name="event" class="form-control" required>
+            <div class="form-group col-md-5">
+                <label class="col-form-label" for="image">Image</label>
+                <select id="image" name="image" class="form-control" required>
                     <?php
-                    $selected_event = $object->event;
-                    include 'eventSelect.php';
+                    $options = Gallery::find_all();
+                    $selected_option = $object->image;
+                    include './layouts/data/options_list.php';
                     ?>
                 </select>
             </div>
 
-            <div class="form-group col-md-6">
-                <label class="col-form-label" for="img">Image</label>
-                <input id="img" name="img" class="form-control" type="file" accept="image/*" <?php if (!$object->id) echo 'required'; ?>/>
+            <div class="form-group col-md-5">
+                <label class="col-form-label" for="user">Commented By</label>
+                <select id="user" name="user" class="form-control" required>
+                    <?php
+                    $selected_user = $object->user;
+                    include 'userSelect.php';
+                    ?>
+                </select>
             </div>
-
-            <div class="form-group col-md-12">
-                <label class="col-form-label" for="note">Note</label>
-                <textarea id="note" name="note" class="form-control" rows="5"><?php echo $object->note; ?></textarea>
+            <div class="form-group col-md-5">
+                <label class="col-form-label" for="datetime">Comment On</label>
+                <input id="datetime" name="datetime" type="datetime-local" class="form-control" value="<?php echo DatabaseObject::form_date($object->datetime); ?>" required>
+            </div>
+            <div class="form-group col-md-7">
+                <label class="col-form-label" for="comment">Comment</label>
+                <textarea id="comment" name="comment" class="form-control" required><?php echo $object->comment; ?></textarea>
             </div>
 
             <div class="row btn-group-vertical col-md-6 col-md-offset-3">

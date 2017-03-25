@@ -41,7 +41,7 @@ class DatabaseObject {
         return array_shift($row);
     }
 
-    private static function instantiate($record) {
+    protected static function instantiate($record) {
         $object = new static;
         foreach ($record as $attribute => $value) {
             if ($object->has_attribute($attribute)) {

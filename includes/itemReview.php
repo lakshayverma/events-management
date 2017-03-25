@@ -16,6 +16,21 @@ class ItemReview extends DatabaseObject {
     public $posted_on;
     public $rating;
     public $img;
+    public $itemObj, $userObj, $eventObj;
+
+    public function init_members() {
+        if (!$this->itemObj) {
+            $this->itemObj = Item::find_by_id($this->item);
+        }
+
+        if (!$this->eventObj) {
+            $this->eventObj = Event::find_by_id($this->event);
+        }
+
+        if (!$this->userObj) {
+            $this->userObj = User::find_by_id($this->user);
+        }
+    }
 
     public static function make($event, $item, $user, $title, $description, $posted_on, $rating) {
         $item_review = new self;
@@ -70,15 +85,18 @@ class ItemReview extends DatabaseObject {
     }
 
     public function get_user() {
-        return User::find_by_id($this->user);
+        $this->init_members();
+        return $this->userObj;
     }
 
     public function get_event() {
-        return Event::find_by_id($this->event);
+        $this->init_members();
+        return $this->eventObj;
     }
 
     public function get_item() {
-        return Item::find_by_id($this->item);
+        $this->init_members();
+        return $this->itemObj;
     }
 
     public function renderTableRow($edit = TRUE) {
@@ -96,4 +114,5 @@ class ItemReview extends DatabaseObject {
     }
 
 }
+
 ?>

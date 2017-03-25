@@ -13,6 +13,7 @@ class Gallery extends DatabaseObject {
     public $note;
     public $img;
     public $eventObj;
+    private $comments;
 
     public static function make($event, $note, $img) {
         $gallery = new Gallery();
@@ -30,6 +31,13 @@ class Gallery extends DatabaseObject {
         if (!$this->eventObj) {
             $this->eventObj = Event::find_by_id($this->event);
         }
+    }
+
+    public function get_comments() {
+        if (!$this->comments) {
+            $this->comments = ImageComment::find_for_image($this);
+        }
+        return $this->comments;
     }
 
     public static function find_all_for_event($event) {

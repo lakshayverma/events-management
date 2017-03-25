@@ -85,6 +85,9 @@ header.custom-header {
   transition-delay: 100ms;
   transition-timing-function: cubic-bezier(0.49, 0.01, 0.48, 1.43);
 }
+.zoom-img.stay:hover {
+  left: 0;
+}
 .zoom-panel:hover {
   transition: 100ms;
   padding: 24px;
@@ -92,9 +95,9 @@ header.custom-header {
   background: #ffffff;
   position: relative;
   top: 0px;
+  height: 300px;
   left: -100px;
   width: 300px;
-  height: 300px;
   -webkit-box-shadow: 16px -4px 64px 12px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 16px -4px 64px 12px rgba(0, 0, 0, 0.22);
   box-shadow: 16px -4px 64px 12px rgba(0, 0, 0, 0.22);
@@ -198,13 +201,29 @@ aside#img_comments {
   box-shadow: -4px 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
 aside#img_comments section {
-  min-height: 80%;
-  max-height: 80%;
+  min-height: 50%;
+  max-height: 550px;
+  overflow: overlay;
+}
+aside#img_comments section ul {
+  margin-right: 12px;
+  margin-bottom: 64px;
 }
 aside#img_comments form {
+  padding-bottom: 8px;
   position: absolute;
   bottom: 0;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 4px;
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 199, 22, 0.49);
+  border-radius: 4px;
+  /*-webkit-box-shadow: inset 0 0 2px goldenrod;*/
 }
 /*# sourceMappingURL=lakshay.css.map */

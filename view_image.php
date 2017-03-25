@@ -43,7 +43,7 @@ if (isset($_GET['image_id'])) {
                             ?>
                             <li class="list-group-item row">
                                 <div class="col-md-4">
-                                    <?php echo $comment->get_user()->avatar("64px", "img img-thumbnail zoom-img stay"); ?>
+                                    <?php echo $comment->get_user()->avatar("64px", "img img-thumbnail zoom-img stay","org"); ?>
                                 </div>
                                 <div class="col-md-8">
                                     <?php echo $comment->comment; ?>

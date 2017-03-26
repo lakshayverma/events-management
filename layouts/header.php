@@ -26,8 +26,9 @@ if ($current_user->id > 0) {
         <script src="custom/dist/js/jquery-3.1.1.min.js"></script>
         <script src="custom/dist/js/bootstrap.min.js"></script>
         <script src="custom/dist/js/select2.js"></script>
-        <script src="custom/dist/js/custom.js"></script>
+        <script src="custom/dist/js/lakshay.js"></script>
         <script src="custom/dist/js/jquery.validate.min.js"></script>
+        <script src="custom/dist/js/jsrender.js"></script>
 
 
         <!--Site Specific Data-->

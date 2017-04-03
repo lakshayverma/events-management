@@ -29,37 +29,43 @@ if ($position == 'admin' || $position == 'member' || $current_event->organiser =
         </ul>
 
         <?php
-        if ($current_user->id == $current_event->organiser) :
-            $object = new CheckList();
-            ?>
+        if (!$current_event->can_be_rated()) :
 
-            <div class="panel panel-default row">
-                <h3 class="panel-heading text-capitalize">New Checklist</h3>
-                <form id="form" class="panel-body form-inline" method="post" action="tableForms/insert.php" enctype="multipart/form-data">
-                    <label class="col-form-label" for="title">Title</label>
-                    <input id="title" name="title" class="form-control" type="text" required/>
-                    <input id="redirect_url" name="redirect_url" type="hidden" readonly value="<?php echo $_SERVER["REQUEST_URI"]; ?>"/>
-                    <label class="col-form-label" for="img">Image</label>
-                    <input id="img" name="img" class="form-control" type="file" accept="image/*" required/>
-                    <input id="created_on" name="created_on" class="form-control" type="hidden" value="<?php echo date("Y-m-d") . 'T' . date("h:i:s"); ?>" />
-                    <input id="table_name" name="table_name" type="hidden" value="checklist"/>
-                    <input name="user" type="hidden" value="<?php echo $current_user->id; ?>"/>
-                    <input name="event" type="hidden" value="<?php echo $current_event->id; ?>"/>
-                    <input class="form-control btn btn-primary" type="submit" value="Create New"/>
-                </form>
-            </div>
+            if ($current_user->id == $current_event->organiser) :
+                $object = new CheckList();
+                ?>
 
-            <script>
-                var formRules = {
-                    rules: {
+                <div class="panel panel-default row">
+                    <h3 class="panel-heading text-capitalize">New Checklist</h3>
+                    <form id="form" class="panel-body form-inline" method="post" action="tableForms/insert.php" enctype="multipart/form-data">
+                        <label class="col-form-label" for="title">Title</label>
+                        <input id="title" name="title" class="form-control" type="text" required/>
+                        <input id="redirect_url" name="redirect_url" type="hidden" readonly value="<?php echo $_SERVER["REQUEST_URI"]; ?>"/>
+                        <label class="col-form-label" for="img">Image</label>
+                        <input id="img" name="img" class="form-control" type="file" accept="image/*" required/>
+                        <input id="created_on" name="created_on" class="form-control" type="hidden" value="<?php echo date("Y-m-d") . 'T' . date("h:i:s"); ?>" />
+                        <input id="table_name" name="table_name" type="hidden" value="checklist"/>
+                        <input name="user" type="hidden" value="<?php echo $current_user->id; ?>"/>
+                        <input name="event" type="hidden" value="<?php echo $current_event->id; ?>"/>
+                        <input class="form-control btn btn-primary" type="submit" value="Create New"/>
+                    </form>
+                </div>
 
-                    },
-                    messages: {
+                <script>
+                    var formRules = {
+                        rules: {
 
-                    }
-                };
-            </script>    
-        <?php endif; ?>
+                        },
+                        messages: {
+
+                        }
+                    };
+                </script>    
+                <?php
+            endif;
+        endif;
+        ?>
+
 
     </div>
 

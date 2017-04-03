@@ -26,7 +26,7 @@
                 }
                 ?>
                 <li class="list-group-item">
-                    <a class="btn btn-success" data-toggle="collapse" data-target="#new_event">
+                    <a class="btn btn-success" href="./new_event.php">
                         <span class="glyphicon glyphicon-plus"></span> Create New event
                     </a>
                 </li>
@@ -62,7 +62,7 @@
         </div>
 
         <div>
-            <h6>Past Events</h6>
+            <h4>Past Events</h4>
             <select id="past_events" onchange="openEvent(this.value)">
                 <option>Events that are in Past.</option>
                 <?php
@@ -94,11 +94,34 @@
         </div>
     </div>
     <!-- /.col-md-4 -->
-    <div id="new_event" class="col-md-6 col-md-offset-1 <?php echo ($current_event) ? "collapse" : ""; ?>">
-        <?php include './layouts/data/event_new.php'; ?>
-    </div>
+<!--    <div id="new_event" class="col-md-6 col-md-offset-1 <?php echo ($current_event) ? "collapse" : ""; ?>">
+    <?php // include './layouts/data/event_new.php'; ?>
+    </div>-->
+
     <div id="contents" class="col-md-8">
-        <?php include './layouts/data/event_details.php'; ?>
+        <?php
+        if ($current_event) {
+            include './layouts/data/event_details.php';
+        } else {
+            ?>
+            <p class="alert alert-danger">
+                <span class="glyphicon glyphicon-flag"></span>
+                <strong>Sorry</strong>, No event has been selected.
+            </p>
+            <p class="alert">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <em>Select</em> an <strong>event </strong>to get it's details.
+            </p>
+            <p class="alert alert-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                You can also create a 
+                <a class="alert-link" href="./new_event.php">
+                    <em><strong>New Event</strong></em>
+                </a>
+            </p>
+            <?php
+        }
+        ?>
     </div>
 
     <div id="my_assigned_tasks" class="col-md-2">
@@ -159,7 +182,7 @@
                                         Checklist: 
                                     </small>
                                     <?php echo $taskParent->anchor("48px", "no-img", "img img-thumbnail"); ?>
-                                    <?php // echo $taskParent->name(); ?>
+                                    <?php // echo $taskParent->name();   ?>
 
                                 </p>
                             </footer>

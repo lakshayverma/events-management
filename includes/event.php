@@ -100,7 +100,7 @@ class Event extends DatabaseObject {
 
     public static function find_for_user($user_id) {
         if (!empty($user_id) && $user_id != 0) {
-            $sql = "select * from ." . static::$table_name . " where organiser = $user_id order by datetime desc";
+            $sql = "select * from ." . static::$table_name . " where organiser = $user_id and datetime >= CURRENT_DATE() order by datetime desc";
             return static::find_by_sql($sql);
         }
     }

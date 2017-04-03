@@ -4,6 +4,7 @@
 @Color_2: lighten(@blue,65%);*/
 /*@Color_1: #f2fde9;
 @Color_2 : #f8fde7;*/
+/*@color_extra_stroke: #489ab1;*/
 /*@Color_1: #f7fdf8;
 @Color_2: #fcffe5;*/
 body {
@@ -15,12 +16,13 @@ header nav {
   margin: 0px !important;
 }
 .site_logo.active .fill {
-  stroke: #ff0000;
+  fill: #44a3d6;
+  stroke: #137692;
   -webkit-transition: all 500ms;
   transition: all 500ms;
 }
 .site_logo .fill {
-  stroke: #ff0000;
+  stroke: #44a3d6;
 }
 header.custom-header {
   padding: 12px;
@@ -217,13 +219,20 @@ aside#img_comments form {
   margin-bottom: 16px;
 }
 ::-webkit-scrollbar {
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 4px;
-  width: 4px;
+  background: #101010;
+  border-radius: 8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 199, 22, 0.49);
-  border-radius: 4px;
+  /*background: darken(@Color_1, 40%);*/
+  background: #74c6f3;
+  border-radius: 8px;
   /*-webkit-box-shadow: inset 0 0 2px goldenrod;*/
+}
+#page_footer {
+  background: #101010;
+  color: #f9f9f9;
+  padding: 16px;
+  border-top: 4px solid rgba(255, 199, 22, 0.49);
 }
 /*# sourceMappingURL=lakshay.css.map */

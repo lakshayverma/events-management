@@ -25,8 +25,8 @@ class Item extends DatabaseObject {
     public function name() {
         return $this->title;
     }
-    
-    public function title(){
+
+    public function title() {
         return $this->description;
     }
 
@@ -46,6 +46,18 @@ class Item extends DatabaseObject {
         $res = $database->query($sql);
         while (($row = mysqli_fetch_assoc($res))) {
             $objects[] = array_shift($row);
+        }
+        return $objects;
+    }
+
+    public static function find_ordered() {
+        global $database;
+        $sql = "select * from item order by type";
+        $res = $database->query($sql);
+        $objects = array();
+        while ($row = mysqli_fetch_assoc($res)) {
+            $type = strtolower($row['type']);
+            $objects[$type][] = $row;
         }
         return $objects;
     }

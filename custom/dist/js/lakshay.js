@@ -56,6 +56,7 @@ function fetch_items_of_type(event, type) {
             },
             function (response) {
                 $('#item').html(response);
+                return response;
             }
     );
 }

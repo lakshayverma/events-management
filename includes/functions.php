@@ -182,5 +182,13 @@ function create_input_element($name, $type, $default, $classes) {
     }
     return $string;
 }
+
+function get_checkbox_value($checkbox) {
+    if (strtolower($checkbox) === 'on') {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
 ?>
 

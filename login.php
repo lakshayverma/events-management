@@ -119,7 +119,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                         <hr>
                         <input id="request_uri" name="request_uri" type="hidden" value="<?php echo $session->request_uri(); ?>"/>
                         <input id="table_name" name="table_name" type="hidden" value="user"/>
-                        <input class="form-control btn btn-primary" type="submit" value="User"/>
+                        <input class="form-control btn btn-primary" type="submit" value="Register"/>
                         <hr>
                         <input class="form-control btn btn-default" type="reset" value="Clear"/>
                     </div>

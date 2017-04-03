@@ -7,7 +7,6 @@
         </a>
         <a class="navbar-brand" href="./">                        
             <?php echo SITE_TITLE; ?>
-            
         </a>
     </div>
     <div id="site_nav" class="navbar-collapse collapse">

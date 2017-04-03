@@ -24,17 +24,19 @@
         endwhile;
         ?>
     </div>
-    <div class="panel panel-default">
-        <h5 class="panel-heading">Make another schedule</h5>
-        <?php $object = new Schedule(); ?>
-        <form id="form" class="panel-body form-inline" method="post" action="tableForms/insert.php" enctype="multipart/form-data">
-            <input name="title" class="form-control" type="text" placeholder="Title" required value="<?php echo $object->title; ?>"/>
-            <input name="datetime" class="form-control" type="datetime-local" value="<?php echo $object->datetime; ?>"  required/>
-            <input type="text" name="description" class="form-control" placeholder="Description" required/>
-            <input id="table_name" name="table_name" type="hidden" value="schedule"/>
-            <input name="event" type="hidden" value="<?php echo $current_event->id; ?>"/>
-            <input name="redirect_url" type="hidden" readonly value="<?php echo $_SERVER["REQUEST_URI"]; ?>"/>
-            <input class="form-control btn  btn-primary" type="submit" value="Submit"/>
-        </form>
-    </div>
+    <?php if (!$current_event->can_be_rated()) : ?>
+        <div class="panel panel-default">
+            <h5 class="panel-heading">Make another schedule</h5>
+            <?php $object = new Schedule(); ?>
+            <form id="form" class="panel-body form-inline" method="post" action="tableForms/insert.php" enctype="multipart/form-data">
+                <input name="title" class="form-control" type="text" placeholder="Title" required value="<?php echo $object->title; ?>"/>
+                <input name="datetime" class="form-control" type="datetime-local" value="<?php echo $object->datetime; ?>"  required/>
+                <input type="text" name="description" class="form-control" placeholder="Description" required/>
+                <input id="table_name" name="table_name" type="hidden" value="schedule"/>
+                <input name="event" type="hidden" value="<?php echo $current_event->id; ?>"/>
+                <input name="redirect_url" type="hidden" readonly value="<?php echo $_SERVER["REQUEST_URI"]; ?>"/>
+                <input class="form-control btn  btn-primary" type="submit" value="Submit"/>
+            </form>
+        </div>
+    <?php endif; ?>
 </div>

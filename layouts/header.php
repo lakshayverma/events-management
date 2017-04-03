@@ -5,6 +5,8 @@ global $session;
 $current_user = $session->get_user_object();
 if ($current_user->id > 0) {
     $invitations = Invitation::find_all_for_user($current_user->id);
+} else {
+    $invitations = 0;
 }
 ?>
 <html lang="en">
@@ -45,7 +47,7 @@ if ($current_user->id > 0) {
 
         <?php if ($session->message()): ?>
             <div class="alert alert-info alert-dismissible fade in">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <span class="text-center">
                     <strong>Message: </strong>
                     <?php echo $session->message(); ?>

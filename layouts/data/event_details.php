@@ -8,11 +8,17 @@ if ($current_event):
     <div class="panel with-nav-tabs panel-default">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
-                <?php if ($current_user->id == $current_event->organiser) : ?>
-                    <li class="right">
-                        <a href="#event_edit" data-toggle="tab"><span class="glyphicon glyphicon-edit"></span></a>
-                    </li>
-                <?php endif; ?>
+                <?php
+                if (!$current_event->can_be_rated()) :
+                    if ($current_user->id == $current_event->organiser) :
+                        ?>
+                        <li class="right">
+                            <a href="#event_edit" data-toggle="tab"><span class="glyphicon glyphicon-edit"></span></a>
+                        </li>
+                        <?php
+                    endif;
+                endif;
+                ?>
                 <li class="active">
                     <a href="#event_description" data-toggle="tab">Event Details</a>
                 </li>

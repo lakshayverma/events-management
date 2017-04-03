@@ -19,8 +19,9 @@ class DatabaseObject {
         return self::find_by_sql("SELECT * FROM " . static::$table_name);
     }
 
-    public static function find_limited($limit = 10) {
-        return self::find_by_sql("SELECT * FROM " . static::$table_name . " limit $limit");
+    public static function find_limited($limit = 10, $page = 1) {
+        $offset = ($page - 1) * $limit;
+        return self::find_by_sql("SELECT * FROM " . static::$table_name . " limit $limit offset $offset");
     }
 
     public static function find_by_id($id) {
@@ -234,8 +235,8 @@ class DatabaseObject {
     public function img() {
         return $this->image_dir() . DS . $this->img;
     }
-    
-    public function image_source(){
+
+    public function image_source() {
         return $this->image_dir() . DS . $this->img;
     }
 

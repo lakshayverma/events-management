@@ -103,10 +103,15 @@ class Session {
         if (isset($this->user_id)) {
             $user = User::find_by_id($this->user_id);
             return $user;
-        }else{
+        } else {
             return new User();
         }
     }
+
+    public function is_admin() {
+        return $this->get_user_object()->is_admin();
+    }
+
 }
 
 $session = new Session();

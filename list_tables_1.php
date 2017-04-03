@@ -1,17 +1,18 @@
 <?php
-$nav_only = FALSE;
-$table = (isset($_GET["table"])) ? $_GET["table"] : "user";
+$table = (isset($_GET["table"])) ? $_GET["table"] : "person";
 $page_title = "Listing " . ucwords($table) . " table";
-include './layouts/header.php';
-admins_only();
 
 $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 10;
 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
 $prev_page = ($page > 1) ? ($page - 1) : 1;
 $next_page = $page + 1;
+
+$nav_only = TRUE;
+include './layouts/header.php';
+admins_only();
 ?>
-<div class="container">
+<div class="container-fluid">
     <?php
     global $database;
     if ($table) {
@@ -52,7 +53,7 @@ $next_page = $page + 1;
                     ?>
                     <p class="text-danger">
                     <big>No records found...</big>
-                    Try other tables or page.
+                    Try other tables or different page number.
                     </p>
                 </div>
             <?php }; ?>
@@ -65,12 +66,11 @@ $next_page = $page + 1;
             </ul>
         </div>
 
-
     </article>
 
     <?php
     $formFile = "./tableForms/{$table
-            }Form.php";
+            }form.php";
     if (file_exists($formFile)) {
         include $formFile;
         $form = TRUE;

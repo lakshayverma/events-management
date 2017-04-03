@@ -174,7 +174,7 @@ class DatabaseObject {
         }
 
         if ($current_user->is_admin() && $editable) {
-            return "<td class=\"col-sm-12 col-md-2\">"
+            return "<td id=\"record-{$this->id}\" class=\"col-sm-12 col-md-2\">"
                     . "<form method=\"post\" action=\"./tableForms/delete.php\" class=\"col-md-6\">"
                     . "<button type=\"submit\" class=\"btn btn-small btn-danger\">"
                     . "<span class=\"glyphicon glyphicon-trash\"></span>"

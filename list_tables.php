@@ -1,24 +1,24 @@
 <?php
-$nav_only = FALSE;
-$table = (isset($_GET["table"])) ? $_GET["table"] : "user";
+$table = (isset($_GET["table"])) ? $_GET["table"] : "person";
 $page_title = "Listing " . ucwords($table) . " table";
-include './layouts/header.php';
-admins_only();
 
 $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 10;
 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
 $prev_page = ($page > 1) ? ($page - 1) : 1;
 $next_page = $page + 1;
+$nav_only = TRUE;
+include './layouts/header.php';
+admins_only();
 ?>
-<div class="container">
+<div class="container-fluid">
     <?php
     global $database;
     if ($table) {
         $table_records = $table::find_limited($limit, $page);
     }
     ?>
-    <nav class="navbar">
+    <nav id="select_tables" class="navbar">
         <div class="navbar-header">
             <a class="navbar-toggle" data-toggle="collapse" data-target="#table_list">
                 <span class="glyphicon glyphicon-chevron-down"></span>
@@ -41,9 +41,11 @@ $next_page = $page + 1;
             </ul>
         </div>
     </nav>
+
     <article id="details" class="panel panel-info">
         <h3 class="panel-heading"><?php echo ucfirst($table); ?></h3>
         <div class="panel-body">
+            <a id="record-0"></a>
             <div class="table-responsive">
                 <?php
                 if ($table_records) {
@@ -52,7 +54,7 @@ $next_page = $page + 1;
                     ?>
                     <p class="text-danger">
                     <big>No records found...</big>
-                    Try other tables or page.
+                    Try other tables or different page number.
                     </p>
                 </div>
             <?php }; ?>
@@ -65,12 +67,11 @@ $next_page = $page + 1;
             </ul>
         </div>
 
-
     </article>
 
     <?php
     $formFile = "./tableForms/{$table
-            }Form.php";
+            }form.php";
     if (file_exists($formFile)) {
         include $formFile;
         $form = TRUE;
@@ -85,6 +86,18 @@ $next_page = $page + 1;
         <?php
     }
     ?>
+
+    <?php
+    if (!$object->id) {
+        $record = 1;
+    } else {
+        $record = $object->id;
+    }
+    ?>
+
+    <a id="to_record" href="#record-<?= $record - 1; ?>" title="To the reocrd's row">
+        <span class="glyphicon glyphicon-menu-up"></span>
+    </a>
 
 </div>
 

@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
         <div class="row btn-group-vertical col-md-6 col-md-offset-3">
             <input id="table_name" name="table_name" type="hidden" value="checklist"/>
             <input id="redirect_url" name="redirect_url" type="hidden" readonly value="<?php echo $_SERVER["REQUEST_URI"]; ?>"/>
-            <input id="created_on" name="created_on" class="form-control" type="hidden" value="<?php echo date("Y-m-d") . 'T' . date("h:i:s"); ?>" />
+            <input id="created_on" name="created_on" class="form-control" type="hidden" value="<?php echo form_date_time(); ?>" />
             <input class="form-control btn  btn-primary" type="submit" value="Submit"/>
             <input class="form-control btn " type="reset" value="Clear"/>
         </div>

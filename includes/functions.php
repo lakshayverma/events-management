@@ -190,5 +190,9 @@ function get_checkbox_value($checkbox) {
         return FALSE;
     }
 }
+
+function form_date_time(){
+    return date("Y-m-d") . 'T' . date("h:i:s");
+}
 ?>
 
